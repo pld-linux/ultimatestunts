@@ -1,19 +1,21 @@
 
-%define	src_ver	0441
-%define	data_ver	0431
+%define	src_ver	0451
+%define	data_ver	0451
 
 Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
-Version:	0.4.4
+Version:	0.4.5
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-src-%{src_ver}.tar.gz
-# Source0-md5:	21b8ff9caab83f1abd7dd57728f832d1
+# Source0-md5:	d53310d27ea0ec8e5ec0c9e289ea84bf
 Source1:	http://dl.sourceforge.net/%{name}/%{name}-data-%{data_ver}.tar.gz
-# Source1-md5:	0b8bfcc05f1525067e13c8b6b81aafd3
+# Source1-md5:	253d84bccfbf7ea4ecb0e6297d3e8d70
 Patch0:		%{name}-directories.patch
+Patch1:		%{name}-sound.patch
+Patch2:		%{name}-gcc34.patch
 URL:		http://ultimatestunts.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
@@ -57,6 +59,8 @@ Pliki z danymi dla UltimateStunts.
 %prep
 %setup -q -n %{name}-src-%{src_ver} -a 1
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 rm -rf autom4te.cache
@@ -84,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/*
-%{_sysconfdir}/*
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
 
 %files data
 %defattr(644,root,root,755)
