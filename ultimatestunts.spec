@@ -1,24 +1,25 @@
 
-%define	src_ver	0421
-%define	data_ver	0421
+%define	src_ver	0441
+%define	data_ver	0431
 
 Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
-Version:	0.4.2
+Version:	0.4.4
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-src-%{src_ver}.tar.gz
-# Source0-md5:	f2a8dbf8bf2b628a8c80e17ab945d1d4
+# Source0-md5:	21b8ff9caab83f1abd7dd57728f832d1
 Source1:	http://dl.sourceforge.net/%{name}/%{name}-data-%{data_ver}.tar.gz
-# Source1-md5:	2bc9c048d5b1f3e9737156e82e687b11
+# Source1-md5:	0b8bfcc05f1525067e13c8b6b81aafd3
 Patch0:		%{name}-directories.patch
 URL:		http://ultimatestunts.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	ode-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	_noautoreqdep libGL.so.1 libGLU.so.1
