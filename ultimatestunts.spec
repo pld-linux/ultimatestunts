@@ -1,18 +1,18 @@
 
-%define	src_ver	0401
-%define	data_ver	0341
+%define	src_ver	0421
+%define	data_ver	0421
 
 Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
-Version:	0.4.0
+Version:	0.4.2
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-src-%{src_ver}.tar.gz
-# Source0-md5:	f0e5288751d4663749eb33d451e4c8fd
+# Source0-md5:	f2a8dbf8bf2b628a8c80e17ab945d1d4
 Source1:	http://dl.sourceforge.net/%{name}/%{name}-data-%{data_ver}.tar.gz
-# Source1-md5:	dd7c00a848f4d321b8756b7fb4540d41
+# Source1-md5:	2bc9c048d5b1f3e9737156e82e687b11
 Patch0:		%{name}-directories.patch
 URL:		http://ultimatestunts.sourceforge.net/
 BuildRequires:	OpenGL-devel
@@ -21,7 +21,6 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_bindir	%{_prefix}/games
 %define	_noautoreqdep libGL.so.1 libGLU.so.1
 
 %description
@@ -46,7 +45,7 @@ OpenGL, d¼wiêk 3D, czy gra przez Internet.
 Summary:	Data files for UltimateStunts
 Summary(pl):	Pliki z danymi dla UltimateStunts
 Group:		X11/Applications/Games
-Requires:	%{name}
+Requires:	%{name} = %{version}-%{release}
 
 %description data
 Data files for UltimateStunts.
@@ -59,6 +58,7 @@ Pliki z danymi dla UltimateStunts.
 %patch0 -p1
 
 %build
+rm -rf autom4te.cache
 %{__aclocal}
 %{__autoconf}
 %{__automake}
