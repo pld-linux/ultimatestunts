@@ -4,9 +4,9 @@ diff -urN aaa/ultimatestunts-src-0401/ultimatestunts/main.cpp ultimatestunts-src
 @@ -148,11 +148,11 @@
  	printf("Welcome to " PACKAGE " version " VERSION "\n");
  
- 	CLConfig conffile(argc, argv);
--	if(!conffile.setFilename("ultimatestunts.conf"))
-+	if(!conffile.setFilename("/etc/ultimatestunts.conf"))
+ 	theMainConfig = new CLConfig(argc, argv);
+-	if(!theMainConfig->setFilename("ultimatestunts.conf"))
++	if(!theMainConfig->setFilename("/etc/ultimatestunts.conf"))
  	{
 -		printf("Error: could not read ultimatestunts.conf\n");
 +		printf("Error: could not read /etc/ultimatestunts.conf\n");
