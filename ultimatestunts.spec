@@ -1,21 +1,20 @@
 
-%define	src_ver	0451
-%define	data_ver	0451
+%define	src_ver	0461
+%define	data_ver	0461
 
 Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
-Version:	0.4.5
+Version:	0.4.6
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-src-%{src_ver}.tar.gz
-# Source0-md5:	d53310d27ea0ec8e5ec0c9e289ea84bf
+# Source0-md5:	ad068409b5dde905d481a7dbee702a0f
 Source1:	http://dl.sourceforge.net/%{name}/%{name}-data-%{data_ver}.tar.gz
-# Source1-md5:	253d84bccfbf7ea4ecb0e6297d3e8d70
+# Source1-md5:	44fcbb1329864f8cf74b4ee75a71bffc
 Patch0:		%{name}-directories.patch
-Patch1:		%{name}-sound.patch
-Patch2:		%{name}-gcc34.patch
+Patch1:		%{name}-gcc34.patch
 URL:		http://ultimatestunts.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
@@ -60,7 +59,6 @@ Pliki z danymi dla UltimateStunts.
 %setup -q -n %{name}-src-%{src_ver} -a 1
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 rm -rf autom4te.cache
@@ -77,7 +75,7 @@ install -d $RPM_BUILD_ROOT{%{_datadir}/games/%{name},%{_sysconfdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-cp -R backgrounds cars music sounds textures tiles tracks \
+cp -R cars environment music sounds textures tiles tracks \
 	$RPM_BUILD_ROOT%{_datadir}/games/%{name}
 install %{name}.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
