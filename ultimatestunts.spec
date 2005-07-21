@@ -66,6 +66,8 @@ install -d $RPM_BUILD_ROOT{%{_datadir}/games/%{name},%{_sysconfdir}}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/games/%{name}/data/Makefile*
 
+cat $RPM_BUILD_ROOT%{_bindir}/ultimatestunts.sh | sed "s:\${datadir}:%{_datadir}:" > $RPM_BUILD_ROOT%{_bindir}/ultimatestunts.sh
+
 ln -s %{_datadir}/games/%{name}/ultimatestunts.conf $RPM_BUILD_ROOT%{_sysconfdir}/ultimatestunts.conf
 
 %clean
