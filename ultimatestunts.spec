@@ -1,21 +1,20 @@
 
-%define	src_ver	0461
-%define	data_ver	0461
+%define	src_ver	0551
 
 Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
-Version:	0.4.6
+Version:	0.5.5
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-src-%{src_ver}.tar.gz
-# Source0-md5:	ad068409b5dde905d481a7dbee702a0f
-Source1:	http://dl.sourceforge.net/ultimatestunts/%{name}-data-%{data_ver}.tar.gz
-# Source1-md5:	44fcbb1329864f8cf74b4ee75a71bffc
+Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
+# Source0-md5:	fc2098a0cad33408e9acf339924488c8
 Patch0:		%{name}-directories.patch
-Patch1:		%{name}-gcc34.patch
+#Patch1:		%{name}-gcc34.patch
 URL:		http://www.ultimatestunts.nl/
+Obsoletes:	%{name}-data
+BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	autoconf
@@ -43,28 +42,17 @@ skoki na mostami, itp.) ¶wietnie siê w ni± gra³o.
 Ta, nowsza wersja daje wiêcej nowych urozmaiceñ, takich jak grafika
 OpenGL, d¼wiêk 3D, czy gra przez Internet.
 
-%package data
-Summary:	Data files for UltimateStunts
-Summary(pl):	Pliki z danymi dla UltimateStunts
-Group:		X11/Applications/Games
-Requires:	%{name} = %{version}-%{release}
-
-%description data
-Data files for UltimateStunts.
-
-%description data -l pl
-Pliki z danymi dla UltimateStunts.
-
 %prep
-%setup -q -n %{name}-src-%{src_ver} -a 1
+%setup -q -n %{name}-srcdata-%{src_ver}
 %patch0 -p1
-%patch1 -p1
+#%%patch1 -p1
 
 %build
-rm -rf autom4te.cache
+# Warning: internal automake voodoo performed
+#rm -rf autom4te.cache
 %{__aclocal}
 %{__autoconf}
-%{__automake}
+#%%{__automake}
 %configure
 %{__make}
 
@@ -73,11 +61,12 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/games/%{name},%{_sysconfdir}}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	bindir=$RPM_BUILD_ROOT/%{_bindir} \
+	datadir=$RPM_BUILD_ROOT/%{_datadir}
 
-cp -R cars environment music sounds textures tiles tracks \
-	$RPM_BUILD_ROOT%{_datadir}/games/%{name}
-install %{name}.conf $RPM_BUILD_ROOT%{_sysconfdir}
+rm -f $RPM_BUILD_ROOT%{_datadir}/games/%{name}/data/Makefile*
+
+ln -s %{_datadir}/games/%{name}/ultimatestunts.conf $RPM_BUILD_ROOT%{_sysconfdir}/ultimatestunts.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -86,8 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/*
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
+# Just a symlink
+%attr(755,root,root) %{_sysconfdir}/*
+%config(noreplace) %verify(not size mtime md5) %{_datadir}/games/%{name}/*.conf
 
-%files data
-%defattr(644,root,root,755)
 %{_datadir}/games/%{name}

@@ -1,30 +1,11 @@
-diff -urN aaa/ultimatestunts-src-0401/ultimatestunts/main.cpp ultimatestunts-src-0401/ultimatestunts/main.cpp
---- aaa/ultimatestunts-src-0401/ultimatestunts/main.cpp	2003-10-07 17:08:31.000000000 +0200
-+++ ultimatestunts-src-0401/ultimatestunts/main.cpp	2003-11-01 19:52:05.000000000 +0100
-@@ -148,11 +148,11 @@
- 	printf("Welcome to " PACKAGE " version " VERSION "\n");
+--- ultimatestunts-srcdata-0551-patrys/configure.ac	2005-07-21 20:27:54.924835744 +0200
++++ ultimatestunts-srcdata-0551/configure.ac	2005-07-21 20:29:16.934368400 +0200
+@@ -176,7 +176,7 @@
+ dnl ------------------
+ dnl TODO: set this with some intelligent script
+ usdatadir="./data/"
+-stuntsdir='${prefix}/games/ultimatestunts'
++stuntsdir='${datadir}/games/ultimatestunts'
  
- 	theMainConfig = new CLConfig(argc, argv);
--	if(!theMainConfig->setFilename("ultimatestunts.conf"))
-+	if(!theMainConfig->setFilename("/etc/ultimatestunts.conf"))
- 	{
--		printf("Error: could not read ultimatestunts.conf\n");
-+		printf("Error: could not read /etc/ultimatestunts.conf\n");
- 		//TODO: create a default one
--	} else {printf("Using ultimatestunts.conf\n");}
-+	} else {printf("Using /etc/ultimatestunts.conf\n");}
- 
- 	CFileControl *fctl = new CFileControl;
- 	{
-diff -urN aaa/ultimatestunts-src-0401/ultimatestunts.conf ultimatestunts-src-0401/ultimatestunts.conf
---- aaa/ultimatestunts-src-0401/ultimatestunts.conf	2003-10-21 12:02:02.000000000 +0200
-+++ ultimatestunts-src-0401/ultimatestunts.conf	2003-11-01 19:49:03.000000000 +0100
-@@ -57,7 +57,7 @@
- 
- #Files section
- [files]
--datadir = /usr/share/ultimatestunts/
-+datadir = /usr/share/games/ultimatestunts/
- 
- #Sound section
- [sound]
+ dnl ------
+ dnl Output
