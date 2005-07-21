@@ -78,5 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 # Just a symlink
 %attr(755,root,root) %{_sysconfdir}/*
 %config(noreplace) %verify(not size mtime md5) %{_datadir}/games/%{name}/*.conf
-
+%attr(755,root,root) %{_datadir}/games/%{name}/%{name}
+%attr(755,root,root) %{_datadir}/games/%{name}/stunts*
+%attr(755,root,root) %{_datadir}/games/%{name}/trackedit
 %{_datadir}/games/%{name}
