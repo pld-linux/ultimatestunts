@@ -15,7 +15,7 @@ Source1:	http://dl.sourceforge.net/%{name}/%{name}-data-%{data_ver}.tar.gz
 # Source1-md5:	44fcbb1329864f8cf74b4ee75a71bffc
 Patch0:		%{name}-directories.patch
 Patch1:		%{name}-gcc34.patch
-URL:		http://ultimatestunts.sourceforge.net/
+URL:		http://www.ultimatestunts.nl/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	autoconf
