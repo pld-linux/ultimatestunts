@@ -9,9 +9,9 @@ Version:	0.4.6
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-src-%{src_ver}.tar.gz
+Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-src-%{src_ver}.tar.gz
 # Source0-md5:	ad068409b5dde905d481a7dbee702a0f
-Source1:	http://dl.sourceforge.net/%{name}/%{name}-data-%{data_ver}.tar.gz
+Source1:	http://dl.sourceforge.net/ultimatestunts/%{name}-data-%{data_ver}.tar.gz
 # Source1-md5:	44fcbb1329864f8cf74b4ee75a71bffc
 Patch0:		%{name}-directories.patch
 Patch1:		%{name}-gcc34.patch
