@@ -1,3 +1,6 @@
+# TODO:
+# - package is not FHS compilant (binary files in /usr/share)
+# - add .desktop file
 
 %define	src_ver	0551
 
