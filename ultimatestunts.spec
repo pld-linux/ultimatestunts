@@ -46,10 +46,11 @@ OpenGL, d¼wiêk 3D, czy gra przez Internet.
 %patch0 -p1
 
 %build
+cp -f /usr/share/automake/config.sub .
 # Warning: internal automake voodoo performed
 %{__aclocal}
 %{__autoconf}
-#%%{__automake}
+#%{__automake}
 %configure
 %{__make}
 
