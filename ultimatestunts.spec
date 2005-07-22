@@ -5,7 +5,7 @@ Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
 Version:	0.5.5
-Release:	1
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
@@ -13,16 +13,16 @@ Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar
 Patch0:		%{name}-directories.patch
 #Patch1:		%{name}-gcc34.patch
 URL:		http://www.ultimatestunts.nl/
-Obsoletes:	%{name}-data
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	ode-devel
+Obsoletes:	ultimatestunts-data
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_noautoreqdep libGL.so.1 libGLU.so.1
+%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 UltimateStunts is a remake of the famous game stunts. It was a 3D
@@ -61,8 +61,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/games/%{name},%{_sysconfdir}}
 
 %{__make} install \
-	bindir=$RPM_BUILD_ROOT/%{_bindir} \
-	datadir=$RPM_BUILD_ROOT/%{_datadir}
+	bindir=$RPM_BUILD_ROOT%{_bindir} \
+	datadir=$RPM_BUILD_ROOT%{_datadir}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/games/%{name}/data/Makefile*
 
@@ -79,8 +79,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 # Just a symlink
 %attr(755,root,root) %{_sysconfdir}/*
-%config(noreplace) %verify(not size mtime md5) %{_datadir}/games/%{name}/*.conf
+%dir %{_datadir}/games/%{name}
+# XXX: WRONG (no configs in /usr allowed)
+%config(noreplace) %verify(not md5 mtime size) %{_datadir}/games/%{name}/*.conf
 %attr(755,root,root) %{_datadir}/games/%{name}/%{name}
 %attr(755,root,root) %{_datadir}/games/%{name}/stunts*
 %attr(755,root,root) %{_datadir}/games/%{name}/trackedit
+# XXX: dups with different perms
 %{_datadir}/games/%{name}
