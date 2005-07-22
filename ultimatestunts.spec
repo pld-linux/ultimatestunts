@@ -11,7 +11,6 @@ Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
 # Source0-md5:	fc2098a0cad33408e9acf339924488c8
 Patch0:		%{name}-directories.patch
-#Patch1:		%{name}-gcc34.patch
 URL:		http://www.ultimatestunts.nl/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
@@ -45,11 +44,9 @@ OpenGL, d¼wiêk 3D, czy gra przez Internet.
 %prep
 %setup -q -n %{name}-srcdata-%{src_ver}
 %patch0 -p1
-#%%patch1 -p1
 
 %build
 # Warning: internal automake voodoo performed
-#rm -rf autom4te.cache
 %{__aclocal}
 %{__autoconf}
 #%%{__automake}
