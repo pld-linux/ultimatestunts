@@ -1,11 +1,11 @@
---- ultimatestunts-srcdata-0551-patrys/configure.ac	2005-07-21 20:27:54.924835744 +0200
-+++ ultimatestunts-srcdata-0551/configure.ac	2005-07-21 20:29:16.934368400 +0200
-@@ -176,7 +176,7 @@
+--- ultimatestunts-srcdata-0561/configure.ac	2005-09-08 12:12:18.000000000 +0200
++++ ultimatestunts-srcdata-0561/configure.ac.new	2005-10-16 02:18:08.000000000 +0200
+@@ -183,7 +183,7 @@
  dnl ------------------
- dnl TODO: set this with some intelligent script
- usdatadir="./data/"
--stuntsdir='${prefix}/games/ultimatestunts'
-+stuntsdir='${datadir}/games/ultimatestunts'
+ dnl The directory locations
+ dnl ------------------
+-usdatadir="${prefix}/share/ultimatestunts/"
++usdatadir="${datadir}/games/ultimatestunts/"
  
- dnl ------
- dnl Output
+ AC_DEFINE_UNQUOTED(PREFIXDIR, "$prefix")
+ 
