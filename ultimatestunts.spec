@@ -1,18 +1,17 @@
 # TODO:
-# - package is not FHS compilant (binary files in /usr/share)
 # - add .desktop file
 
-%define	src_ver	0551
+%define	src_ver	0561
 
 Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
-Version:	0.5.5
+Version:	0.5.6
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
-# Source0-md5:	fc2098a0cad33408e9acf339924488c8
+# Source0-md5:	9c2bfd6f2e25c98ebe852522afe4ccfa
 Patch0:		%{name}-directories.patch
 URL:		http://www.ultimatestunts.nl/
 BuildRequires:	OpenAL-devel
@@ -21,6 +20,7 @@ BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	ode-devel
+BuildRequires:	sed >= 4.0
 Obsoletes:	ultimatestunts-data
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -47,13 +47,15 @@ OpenGL, d¼wiêk 3D, czy gra przez Internet.
 %prep
 %setup -q -n %{name}-srcdata-%{src_ver}
 %patch0 -p1
+sed -i 's/fr_FR/fr/' po/LINGUAS
+mv po/fr{_FR,}.po
 
 %build
-cp -f /usr/share/automake/config.sub .
-# Warning: internal automake voodoo performed
 %{__aclocal}
 %{__autoconf}
-#%{__automake}
+%{__automake}
+# config.h.in created manually, touch it so make will not call autoheader
+touch config.h.in
 %configure
 %{__make}
 
@@ -62,29 +64,21 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/games/%{name},%{_sysconfdir}}
 
 %{__make} install \
-	bindir=$RPM_BUILD_ROOT%{_bindir} \
-	datadir=$RPM_BUILD_ROOT%{_datadir}
+	DESTDIR=$RPM_BUILD_ROOT \
+	localedir=%{_datadir}/locale \
+	usdatadir=$RPM_BUILD_ROOT%{_datadir}/games/%{name}
 
-rm -f $RPM_BUILD_ROOT%{_datadir}/games/%{name}/data/Makefile*
+rm -rf $RPM_BUILD_ROOT%{_datadir}/games/%{name}/lang
+find $RPM_BUILD_ROOT%{_datadir}/games/%{name} -name CVS | xargs rm -rf
 
-cat $RPM_BUILD_ROOT%{_bindir}/ultimatestunts.sh | sed "s:\${datadir}:%{_datadir}:" > $RPM_BUILD_ROOT%{_bindir}/ultimatestunts.sh
-
-ln -s %{_datadir}/games/%{name}/ultimatestunts.conf $RPM_BUILD_ROOT%{_sysconfdir}/ultimatestunts.conf
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/*
-# Just a symlink
-%attr(755,root,root) %{_sysconfdir}/*
-%dir %{_datadir}/games/%{name}
-# XXX: WRONG (no configs in /usr allowed)
-%config(noreplace) %verify(not md5 mtime size) %{_datadir}/games/%{name}/*.conf
-%attr(755,root,root) %{_datadir}/games/%{name}/%{name}
-%attr(755,root,root) %{_datadir}/games/%{name}/stunts*
-%attr(755,root,root) %{_datadir}/games/%{name}/trackedit
-# XXX: dups with different perms
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
 %{_datadir}/games/%{name}
