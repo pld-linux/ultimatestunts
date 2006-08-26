@@ -1,17 +1,17 @@
 # TODO:
 # - add .desktop file
 
-%define	src_ver	0561
+%define	src_ver	0621
 
 Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
-Version:	0.5.6
+Version:	0.6.2
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
-# Source0-md5:	9c2bfd6f2e25c98ebe852522afe4ccfa
+# Source0-md5:	173c9e915d4bcaf7206d8b872b387ad9
 Patch0:		%{name}-directories.patch
 URL:		http://www.ultimatestunts.nl/
 BuildRequires:	OpenAL-devel
@@ -39,7 +39,7 @@ sound and Internet multiplaying.
 UltimateStunts jest now± wersj± s³awnej gry stunts. By³a to
 trójwymiarowa gra wy¶cigowa, z prost± grafik± CGA/EGA/VGA bez tekstur
 ani bez cieniowania, lecz dziêki spektakularnym akrobacj± (obroty,
-skoki na mostami, itp.) ¶wietnie siê w ni± gra³o.
+skoki nad mostami, itp.) ¶wietnie siê w ni± gra³o.
 
 Ta, nowsza wersja daje wiêcej nowych urozmaiceñ, takich jak grafika
 OpenGL, d¼wiêk 3D, czy gra przez Internet.
