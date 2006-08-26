@@ -1,30 +1,30 @@
+# TODO:
+# - add .desktop file
 
-%define	src_ver	0451
-%define	data_ver	0451
+%define	src_ver	0621
 
 Summary:	Remake of the famous game stunts
 Summary(pl):	Nowa wersja s³awnej gry stunts
 Name:		ultimatestunts
-Version:	0.4.5
-Release:	1
+Version:	0.6.2
+Release:	0.1
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-src-%{src_ver}.tar.gz
-# Source0-md5:	d53310d27ea0ec8e5ec0c9e289ea84bf
-Source1:	http://dl.sourceforge.net/%{name}/%{name}-data-%{data_ver}.tar.gz
-# Source1-md5:	253d84bccfbf7ea4ecb0e6297d3e8d70
+Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
+# Source0-md5:	173c9e915d4bcaf7206d8b872b387ad9
 Patch0:		%{name}-directories.patch
-Patch1:		%{name}-sound.patch
-Patch2:		%{name}-gcc34.patch
-URL:		http://ultimatestunts.sourceforge.net/
+URL:		http://www.ultimatestunts.nl/
+BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	ode-devel
+BuildRequires:	sed >= 4.0
+Obsoletes:	ultimatestunts-data
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_noautoreqdep libGL.so.1 libGLU.so.1
+%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 UltimateStunts is a remake of the famous game stunts. It was a 3D
@@ -39,34 +39,23 @@ sound and Internet multiplaying.
 UltimateStunts jest now± wersj± s³awnej gry stunts. By³a to
 trójwymiarowa gra wy¶cigowa, z prost± grafik± CGA/EGA/VGA bez tekstur
 ani bez cieniowania, lecz dziêki spektakularnym akrobacj± (obroty,
-skoki na mostami, itp.) ¶wietnie siê w ni± gra³o.
+skoki nad mostami, itp.) ¶wietnie siê w ni± gra³o.
 
 Ta, nowsza wersja daje wiêcej nowych urozmaiceñ, takich jak grafika
 OpenGL, d¼wiêk 3D, czy gra przez Internet.
 
-%package data
-Summary:	Data files for UltimateStunts
-Summary(pl):	Pliki z danymi dla UltimateStunts
-Group:		X11/Applications/Games
-Requires:	%{name} = %{version}-%{release}
-
-%description data
-Data files for UltimateStunts.
-
-%description data -l pl
-Pliki z danymi dla UltimateStunts.
-
 %prep
-%setup -q -n %{name}-src-%{src_ver} -a 1
+%setup -q -n %{name}-srcdata-%{src_ver}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+sed -i 's/fr_FR/fr/' po/LINGUAS
+mv po/fr{_FR,}.po
 
 %build
-rm -rf autom4te.cache
 %{__aclocal}
 %{__autoconf}
 %{__automake}
+# config.h.in created manually, touch it so make will not call autoheader
+touch config.h.in
 %configure
 %{__make}
 
@@ -75,21 +64,21 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_datadir}/games/%{name},%{_sysconfdir}}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	localedir=%{_datadir}/locale \
+	usdatadir=$RPM_BUILD_ROOT%{_datadir}/games/%{name}
 
-cp -R backgrounds cars music sounds textures tiles tracks \
-	$RPM_BUILD_ROOT%{_datadir}/games/%{name}
-install %{name}.conf $RPM_BUILD_ROOT%{_sysconfdir}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/games/%{name}/lang
+find $RPM_BUILD_ROOT%{_datadir}/games/%{name} -name CVS | xargs rm -rf
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/*
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/*
-
-%files data
-%defattr(644,root,root,755)
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
 %{_datadir}/games/%{name}
