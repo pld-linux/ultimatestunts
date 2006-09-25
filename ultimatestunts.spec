@@ -38,7 +38,7 @@ sound and Internet multiplaying.
 %description -l pl
 UltimateStunts jest now± wersj± s³awnej gry stunts. By³a to
 trójwymiarowa gra wy¶cigowa, z prost± grafik± CGA/EGA/VGA bez tekstur
-ani bez cieniowania, lecz dziêki spektakularnym akrobacj± (obroty,
+ani bez cieniowania, lecz dziêki spektakularnym akrobacjom (obroty,
 skoki nad mostami, itp.) ¶wietnie siê w ni± gra³o.
 
 Ta, nowsza wersja daje wiêcej nowych urozmaiceñ, takich jak grafika
