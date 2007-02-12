@@ -4,7 +4,7 @@
 %define	src_ver	0631
 
 Summary:	Remake of the famous game stunts
-Summary(pl):	Nowa wersja s³awnej gry stunts
+Summary(pl.UTF-8):   Nowa wersja sÅ‚awnej gry stunts
 Name:		ultimatestunts
 Version:	0.6.3
 Release:	1
@@ -35,14 +35,14 @@ jump over, etc.) it was really fun to play.
 The remake provides more modern features, like openGL graphics, 3D
 sound and Internet multiplaying.
 
-%description -l pl
-UltimateStunts jest now± wersj± s³awnej gry stunts. By³a to
-trójwymiarowa gra wy¶cigowa, z prost± grafik± CGA/EGA/VGA bez tekstur
-ani bez cieniowania, lecz dziêki spektakularnym akrobacjom (obroty,
-skoki nad mostami, itp.) ¶wietnie siê w ni± gra³o.
+%description -l pl.UTF-8
+UltimateStunts jest nowÄ… wersjÄ… sÅ‚awnej gry stunts. ByÅ‚a to
+trÃ³jwymiarowa gra wyÅ›cigowa, z prostÄ… grafikÄ… CGA/EGA/VGA bez tekstur
+ani bez cieniowania, lecz dziÄ™ki spektakularnym akrobacjom (obroty,
+skoki nad mostami, itp.) Å›wietnie siÄ™ w niÄ… graÅ‚o.
 
-Ta, nowsza wersja daje wiêcej urozmaiceñ, takich jak grafika OpenGL,
-d¼wiêk 3D, czy gra przez Internet.
+Ta, nowsza wersja daje wiÄ™cej urozmaiceÅ„, takich jak grafika OpenGL,
+dÅºwiÄ™k 3D, czy gra przez Internet.
 
 %prep
 %setup -q -n %{name}-srcdata-%{src_ver}
