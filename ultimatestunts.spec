@@ -4,7 +4,7 @@
 %define	src_ver	0631
 
 Summary:	Remake of the famous game stunts
-Summary(pl.UTF-8):   Nowa wersja sławnej gry stunts
+Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
 Version:	0.6.3
 Release:	1
