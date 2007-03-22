@@ -1,22 +1,24 @@
 # TODO:
 # - add .desktop file
 
-%define	src_ver	0631
+%define	src_ver	0701
 
 Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
-Version:	0.6.3
-Release:	1
+Version:	0.7.0
+Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
-# Source0-md5:	4b20bf56049b5d36358f0c12e9991d52
+# Source0-md5:	a03459c3642898b6a8a7520ef0b191a5
 Patch0:		%{name}-directories.patch
 URL:		http://www.ultimatestunts.nl/
+BuildRequires:	Mesa-libGLU
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL-devel >= 1.2.0
+BuildRequires:	SDL_image-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	ode-devel
@@ -51,6 +53,7 @@ sed -i 's/fr_FR/fr/' po/LINGUAS
 mv po/fr{_FR,}.po
 
 %build
+touch config.rpath
 %{__aclocal}
 %{__autoconf}
 %{__automake}
