@@ -1,17 +1,17 @@
 # TODO:
 # - add .desktop file
 
-%define	src_ver	0701
+%define	src_ver	0711
 
 Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
-Version:	0.7.0
+Version:	0.7.1
 Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
-# Source0-md5:	a03459c3642898b6a8a7520ef0b191a5
+# Source0-md5:	75cb39de7700859d7bff577bbafcad80
 Patch0:		%{name}-directories.patch
 URL:		http://www.ultimatestunts.nl/
 BuildRequires:	Mesa-libGLU
@@ -21,6 +21,7 @@ BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	SDL_image-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	freealut-devel
 BuildRequires:	ode-devel
 BuildRequires:	sed >= 4.0
 Obsoletes:	ultimatestunts-data
@@ -49,7 +50,8 @@ dźwięk 3D, czy gra przez Internet.
 %prep
 %setup -q -n %{name}-srcdata-%{src_ver}
 %patch0 -p1
-sed -i 's/fr_FR/fr/' po/LINGUAS
+%{__sed} -i 's/fr_FR/fr/' po/LINGUAS
+%{__sed} -i 's#@MKINSTALLDIRS@#/usr/share/automake/mkinstalldirs#' po/Makefile.in.in
 mv po/fr{_FR,}.po
 
 %build
