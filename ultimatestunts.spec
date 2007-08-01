@@ -6,7 +6,7 @@
 Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
-Version:	0.7.1
+Version:	0.7.2
 Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications/Games
