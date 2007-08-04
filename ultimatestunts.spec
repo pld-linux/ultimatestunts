@@ -6,7 +6,7 @@
 Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
-Version:	0.7.2
+Version:	0.7.1
 Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications/Games
@@ -14,9 +14,8 @@ Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar
 # Source0-md5:	75cb39de7700859d7bff577bbafcad80
 Patch0:		%{name}-directories.patch
 URL:		http://www.ultimatestunts.nl/
-BuildRequires:	Mesa-libGLU
 BuildRequires:	OpenAL-devel
-BuildRequires:	OpenGL-devel
+BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	SDL-devel >= 1.2.0
 BuildRequires:	SDL_image-devel
 BuildRequires:	autoconf
