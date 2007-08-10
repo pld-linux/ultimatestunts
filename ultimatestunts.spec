@@ -1,17 +1,17 @@
 # TODO:
 # - add .desktop file
 
-%define	src_ver	0711
+%define	src_ver	0721
 
 Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
-Version:	0.7.1
+Version:	0.7.2
 Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
-# Source0-md5:	75cb39de7700859d7bff577bbafcad80
+# Source0-md5:	6d740268bb0f127aace9e41885564d7f
 Patch0:		%{name}-directories.patch
 URL:		http://www.ultimatestunts.nl/
 BuildRequires:	OpenAL-devel
