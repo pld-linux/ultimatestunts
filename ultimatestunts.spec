@@ -1,17 +1,17 @@
 # TODO:
 # - add .desktop file
 
-%define	src_ver	0741
+%define	src_ver	0751
 
 Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
-Version:	0.7.4
+Version:	0.7.5
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
-# Source0-md5:	bbc9c25c599b76e1f3c1d8f8a3e5f820
+# Source0-md5:	e216bbbfc3d2a868be7e647aa79c6bca
 Patch0:		%{name}-directories.patch
 URL:		http://www.ultimatestunts.nl/
 BuildRequires:	OpenAL-devel
@@ -52,6 +52,7 @@ dźwięk 3D, czy też gra przez Internet.
 %{__sed} -i 's/fr_FR/fr/' po/LINGUAS
 %{__sed} -i 's#@MKINSTALLDIRS@#/usr/share/automake/mkinstalldirs#' po/Makefile.in.in
 mv po/fr{_FR,}.po
+mv po/fr{_FR,}.gmo
 
 %build
 touch config.rpath
