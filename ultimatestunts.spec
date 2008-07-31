@@ -1,5 +1,5 @@
 # TODO:
-# - add .desktop file
+# - move config to home etc
 
 %define	src_ver	0751
 
@@ -12,6 +12,9 @@ License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
 # Source0-md5:	e216bbbfc3d2a868be7e647aa79c6bca
+Source1:	%{name}.png
+Source2:	%{name}.desktop
+Source3:	%{name}-editor.desktop
 Patch0:		%{name}-directories.patch
 URL:		http://www.ultimatestunts.nl/
 BuildRequires:	OpenAL-devel
@@ -66,7 +69,11 @@ touch config.h.in
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_datadir}/games/%{name},%{_sysconfdir}}
+install -d $RPM_BUILD_ROOT{%{_datadir}/games/%{name},%{_sysconfdir},%{_desktopdir},%{_pixmapsdir}}
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_pixmapsdir}/%{name}.png
+install %{SOURCE2} $RPM_BUILD_ROOT%{_desktopdir}/%{name}.desktop
+install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}/%{name}-editor.desktop
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -87,3 +94,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
 %{_datadir}/games/%{name}
+%{_pixmapsdir}/%{name}.png
+%{_desktopdir}/*.desktop
