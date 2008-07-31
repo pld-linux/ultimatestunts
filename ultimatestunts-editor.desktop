@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Stunts Editor
+GenericName=Ultimate Stunts Track Editor
+GenericName[pl]=Ultimate Stunts Edytor Tras
+Icon=ultimatestunts
+Exec=ustuntstrackedit
+Categories=Game;SportsGame;
+Encoding=UTF-8

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Ultimate Stunts
+GenericName=Stunt Racing
+Icon=ultimatestunts
+Exec=ustunts
+Categories=Game;SportsGame;
+Encoding=UTF-8
+#Categories=Game;ArcadeGame;
