@@ -7,7 +7,7 @@ Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
 Version:	0.7.5
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
@@ -65,7 +65,7 @@ touch config.rpath
 # config.h.in created manually, touch it so make will not call autoheader
 touch config.h.in
 %configure
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
