@@ -1,17 +1,17 @@
+#
 # TODO:
 # - move config to home etc
-
-%define	src_ver	0751
-
+#
+%define	src_ver	0761
 Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
-Version:	0.7.5
-Release:	3
+Version:	0.7.6
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
-# Source0-md5:	e216bbbfc3d2a868be7e647aa79c6bca
+Source0:	http://downloads.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
+# Source0-md5:	117745dd282f9904c2d641d7f19714f7
 Source1:	%{name}.png
 Source2:	%{name}.desktop
 Source3:	%{name}-editor.desktop
@@ -53,12 +53,12 @@ dźwięk 3D, czy też gra przez Internet.
 %setup -q -n %{name}-srcdata-%{src_ver}
 %patch0 -p1
 %{__sed} -i 's/fr_FR/fr/' po/LINGUAS
-%{__sed} -i 's#@MKINSTALLDIRS@#/usr/share/automake/mkinstalldirs#' po/Makefile.in.in
 mv po/fr{_FR,}.po
 mv po/fr{_FR,}.gmo
 
 %build
 touch config.rpath
+%{__gettextize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -80,8 +80,8 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}/%{name}-editor.desktop
 	localedir=%{_datadir}/locale \
 	usdatadir=$RPM_BUILD_ROOT%{_datadir}/games/%{name}
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/games/%{name}/lang
-find $RPM_BUILD_ROOT%{_datadir}/games/%{name} -name CVS | xargs rm -rf
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/games/%{name}/lang
+find $RPM_BUILD_ROOT%{_datadir}/games/%{name} -name CVS | xargs %{__rm} -r
 
 %find_lang %{name}
 
@@ -91,8 +91,13 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS README doc
-%attr(755,root,root) %{_bindir}/*
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.conf
+%attr(755,root,root) %{_bindir}/ustunts
+%attr(755,root,root) %{_bindir}/ustunts3dedit
+%attr(755,root,root) %{_bindir}/ustuntsai
+%attr(755,root,root) %{_bindir}/ustuntsserver
+%attr(755,root,root) %{_bindir}/ustuntstrackedit
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ultimatestunts.conf
 %{_datadir}/games/%{name}
-%{_pixmapsdir}/%{name}.png
-%{_desktopdir}/*.desktop
+%{_pixmapsdir}/ultimatestunts.png
+%{_desktopdir}/ultimatestunts.desktop
+%{_desktopdir}/ultimatestunts-editor.desktop
