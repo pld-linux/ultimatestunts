@@ -1,0 +1,11 @@
+--- ultimatestunts-srcdata-0761/ultimatestunts.conf~	2011-01-27 20:58:13.000000000 +0100
++++ ultimatestunts-srcdata-0761/ultimatestunts.conf	2011-02-15 09:24:38.731281767 +0100
+@@ -181,7 +181,7 @@
+ 
+ #Files section
+ [files]
+-datadir = /usr/local/share/ultimatestunts/
++datadir = /usr/share/games/ultimatestunts/
+ savedir = ~/.ultimatestunts/saveddata/
+ 
+ #Metaserver settings
