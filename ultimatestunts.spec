@@ -1,13 +1,9 @@
-#
-# TODO:
-# - move config to home etc
-#
 %define	src_ver	0761
 Summary:	Remake of the famous game stunts
 Summary(pl.UTF-8):	Nowa wersja sławnej gry stunts
 Name:		ultimatestunts
 Version:	0.7.6
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://downloads.sourceforge.net/ultimatestunts/%{name}-srcdata-%{src_ver}.tar.gz
@@ -16,6 +12,7 @@ Source1:	%{name}.png
 Source2:	%{name}.desktop
 Source3:	%{name}-editor.desktop
 Patch0:		%{name}-directories.patch
+Patch1:		%{name}-config.patch
 URL:		http://www.ultimatestunts.nl/
 BuildRequires:	OpenAL-devel
 BuildRequires:	OpenGL-GLU-devel
@@ -53,6 +50,7 @@ dźwięk 3D, czy też gra przez Internet.
 %prep
 %setup -q -n %{name}-srcdata-%{src_ver}
 %patch0 -p1
+%patch1 -p1
 %{__sed} -i 's/fr_FR/fr/' po/LINGUAS
 mv po/fr{_FR,}.po
 mv po/fr{_FR,}.gmo
