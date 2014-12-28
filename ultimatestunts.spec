@@ -21,7 +21,7 @@ BuildRequires:	SDL_image-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	freealut-devel
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	ode-devel
 BuildRequires:	sed >= 4.0
 Obsoletes:	ultimatestunts-data
