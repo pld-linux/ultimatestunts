@@ -49,8 +49,8 @@ dźwięk 3D, czy też gra przez Internet.
 
 %prep
 %setup -q -n %{name}-srcdata-%{src_ver}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 %{__sed} -i 's/fr_FR/fr/' po/LINGUAS
 mv po/fr{_FR,}.po
 mv po/fr{_FR,}.gmo
